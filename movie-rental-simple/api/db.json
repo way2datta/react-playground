@@ -1,0 +1,22 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "first_name": "Datta",
+      "last_name": "Kale",
+      "email": "Datta.Kale@test.com"
+    },
+    {
+      "id": 2,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "John.Doe@test.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Mayur",
+      "last_name": "Mali",
+      "email": "Mayur.Mali@test.com"
+    }
+  ]
+}
