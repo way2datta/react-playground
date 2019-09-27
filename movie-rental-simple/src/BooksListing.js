@@ -30,6 +30,18 @@ export class BooksListing extends React.Component {
   };
 
   async componentDidMount() {
+    await this.fetchAllBooks();
+  }
+
+  handleReturnBook = async (event, id) => {
+    await axios.patch("http://localhost:5000/books/"+id,{
+      status: 'available',
+      customer: ''
+    });
+    await this.fetchAllBooks();
+  };
+
+  async fetchAllBooks() {
     const response = await axios.get("http://localhost:5000/books");
     this.setState({
       datasource: response.data
@@ -40,13 +52,16 @@ export class BooksListing extends React.Component {
     return (
       <>
         <h1>Books</h1>
-        <Gridview datasource={this.state.datasource} />
+        <Gridview
+          datasource={this.state.datasource}
+          handleReturnBook={this.handleReturnBook}
+        />
       </>
     );
   }
 }
 
-function Gridview({ datasource }) {
+function Gridview({ datasource, handleReturnBook }) {
   const classes = useStyles();
 
   if (!datasource.length) {
@@ -68,7 +83,7 @@ function Gridview({ datasource }) {
           </TableHead>
           <TableBody>
             {datasource.map(x => {
-              return ( 
+              return (
                 <TableRow key={x.id}>
                   <TableCell>{x.name}</TableCell>
                   <TableCell>{x.authorName}</TableCell>
@@ -88,6 +103,7 @@ function Gridview({ datasource }) {
                         variant="contained"
                         color="primary"
                         className={classes.button}
+                        onClick={(e)=>handleReturnBook(e, x.id)}
                       >
                         Return
                       </Button>
