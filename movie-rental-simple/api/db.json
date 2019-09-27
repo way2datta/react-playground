@@ -25,21 +25,21 @@
       "name": "JavaScript Good parts",
       "authorName": "Douglas Crockford",
       "status": "available",
-      "borrowedBy": null
+      "customer": "Datta Kale"
     },
     {
       "id": 2,
       "name": "Clean code",
       "authorName": "Uncle Bob",
       "status": "available",
-      "borrowedBy": null
+      "customer": null
     },
     {
       "id": 3,
       "name": "Refactoring",
       "authorName": "Martin Fowler",
       "status": "available",
-      "borrowedBy": null
+      "customer": null
     }
   ]
 }

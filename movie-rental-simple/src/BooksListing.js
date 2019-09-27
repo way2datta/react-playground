@@ -34,6 +34,7 @@ function Gridview({ datasource }) {
           <th>Name</th>
           <th>Author</th>
           <th>Status</th>
+          <th>Customer</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,7 @@ function Gridview({ datasource }) {
               <td>{x.name}</td>
               <td>{x.authorName}</td>
               <td>{x.status}</td>
+              <td>{x.customer || '--'}</td>
             </tr>
           })
         }
