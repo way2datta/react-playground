@@ -2,21 +2,41 @@
   "customers": [
     {
       "id": 1,
-      "first_name": "Datta",
-      "last_name": "Kale",
+      "firstName": "Datta",
+      "lastName": "Kale",
       "email": "Datta.Kale@test.com"
     },
     {
       "id": 2,
-      "first_name": "John",
-      "last_name": "Doe",
+      "firstName": "John",
+      "lastName": "Doe",
       "email": "John.Doe@test.com"
     },
     {
       "id": 3,
-      "first_name": "Mayur",
-      "last_name": "Mali",
+      "firstName": "Mayur",
+      "lastName": "Mali",
       "email": "Mayur.Mali@test.com"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "name": "JavaScript Good parts",
+      "authorName": "Douglas Crockford",
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "name": "Clean code",
+      "authorName": "Uncle Bob",
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "name": "Refactoring",
+      "authorName": "Martin Fowler",
+      "status": "available"
     }
   ]
 }
