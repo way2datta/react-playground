@@ -1,5 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Home } from "./Home";
+import { CustomersListing } from "./CustomersListing";
+import { BooksListing } from "./BooksListing";
+import { Header } from "./Header";
 
 export default class App extends React.Component {
   render() {
@@ -8,41 +12,12 @@ export default class App extends React.Component {
         <div>
           <Header />
           <Route exact path="/" component={Home} />
-          <Route path="/customers" component={CustomerListing} />
-          <Route path="/books" component={Books} />
+          <Route path="/customers" component={CustomersListing} />
+          <Route path="/books" component={BooksListing} />
         </div>
       </Router>
     );
   }
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function CustomerListing() {
-  return <h2>About</h2>;
-}
-
-function Books({ match }) {
-  return (
-    <h1>Books</h1>
-    );
-}
-
-function Header() {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/customers">Customers</Link>
-      </li>
-      <li>
-        <Link to="/books">Books</Link>
-      </li>
-    </ul>
-  );
-}
 
