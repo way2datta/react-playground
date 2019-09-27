@@ -1,4 +1,6 @@
 import React from "react";
-export function BooksListing({ match }) {
-  return (<h1>Books</h1>);
+export class BooksListing extends React.Component {
+  render() {
+    return (<h1>Books</h1>);
+  }
 }
