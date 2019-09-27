@@ -4,17 +4,18 @@ import { Home } from "./Home";
 import { CustomersListing } from "./CustomersListing";
 import { BooksListing } from "./BooksListing";
 import { Header } from "./Header";
+import Container from '@material-ui/core/Container';
 
 export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <Container fixed>
           <Header />
           <Route exact path="/" component={Home} />
           <Route path="/customers" component={CustomersListing} />
           <Route path="/books" component={BooksListing} />
-        </div>
+        </Container>
       </Router>
     );
   }
