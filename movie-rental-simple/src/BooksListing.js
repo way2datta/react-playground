@@ -34,11 +34,15 @@ export class BooksListing extends React.Component {
   }
 
   handleReturnBook = async (event, id) => {
-    await axios.patch("http://localhost:5000/books/"+id,{
-      status: 'available',
-      customer: ''
+    await axios.patch("http://localhost:5000/books/" + id, {
+      status: "available",
+      customer: ""
     });
     await this.fetchAllBooks();
+  };
+
+  handleBorrowBook = (event, id) => {
+    this.props.history.push("/books/"+id+"/borrow");
   };
 
   async fetchAllBooks() {
@@ -55,13 +59,14 @@ export class BooksListing extends React.Component {
         <Gridview
           datasource={this.state.datasource}
           handleReturnBook={this.handleReturnBook}
+          handleBorrowBook={this.handleBorrowBook}
         />
       </>
     );
   }
 }
 
-function Gridview({ datasource, handleReturnBook }) {
+function Gridview({ datasource, handleReturnBook, handleBorrowBook }) {
   const classes = useStyles();
 
   if (!datasource.length) {
@@ -95,6 +100,7 @@ function Gridview({ datasource, handleReturnBook }) {
                         variant="contained"
                         color="primary"
                         className={classes.button}
+                        onClick={e => handleBorrowBook(e, x.id)}
                       >
                         Borrow
                       </Button>
@@ -103,7 +109,7 @@ function Gridview({ datasource, handleReturnBook }) {
                         variant="contained"
                         color="primary"
                         className={classes.button}
-                        onClick={(e)=>handleReturnBook(e, x.id)}
+                        onClick={e => handleReturnBook(e, x.id)}
                       >
                         Return
                       </Button>
