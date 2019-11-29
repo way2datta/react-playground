@@ -1,92 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 
-export class BorrowBookView extends React.Component {
-  state = {
-    book: {},
-    selectedCustomer: "",
-    customers: []
+export function BorrowBookView(props) {
+  const [book, setBook] = useState({});
+  const [selectedCustomer, setCustomer] = useState("");
+  const [customers, setCustomers] = useState([]);
+  const bookId = props.match.params.id;
+
+  useEffect(() => {
+    async function fetchBook() {
+      const response = await axios.get("http://localhost:5000/books/" + bookId);
+      setBook(response.data);
+    }
+
+    async function fetchCustomers() {
+      const response = await axios.get("http://localhost:5000/customers");
+      setCustomers(response.data);
+    }
+    fetchBook();
+    fetchCustomers();    
+  }, [bookId]);
+ 
+  const handleCustomerChange = e => {
+    setCustomer(e.target.value);
   };
 
-  async componentDidMount() {
-    await this.fetchBook();
-    await this.fetchCustomers();
-  }
-
-  async fetchBook() {
-    const bookId = this.props.match.params.id;
-    const response = await axios.get("http://localhost:5000/books/" + bookId);
-    this.setState({
-      book: response.data
-    });
-  }
-
-  async fetchCustomers() {
-    const response = await axios.get("http://localhost:5000/customers");
-    this.setState({
-      customers: response.data
-    });
-  }
-
-  handleCustomerChange = e => {
-    this.setState({
-      selectedCustomer: e.target.value
-    });
-  };
-
-  handleBorrowBook = async () => {
-    await axios.patch("http://localhost:5000/books/" + this.state.book.id, {
+  const handleBorrowBook = async () => {
+    await axios.patch("http://localhost:5000/books/" + book.id, {
       status: "borrowed",
-      customer: this.state.selectedCustomer
+      customer: selectedCustomer
     });
-    this.props.history.push("/books");
+    props.history.push("/books");
   };
 
-  render() {
-    return (
-      <>
-        <Grid container>
-          <h1>Borrow book</h1>
-          <Grid item xs={12}>
-            <label>Name: </label>
-            {this.state.book.name}
-          </Grid>
-          <Grid item xs={12}>
-            <label>Author: </label>
-            {this.state.book.authorName}
-          </Grid>
-          <Grid item xs={12}>
-            <label>Status: </label>
-            {this.state.book.status}
-          </Grid>
-          <Grid item xs={12}>
-            <label>Customer: </label>{" "}
-            <Select
-              value={this.state.selectedCustomer}
-              onChange={this.handleCustomerChange}
-            >
-              {this.state.customers.map(x => (
-                <MenuItem key={x.id} value={x.firstName + " " + x.lastName}>
-                  {x.firstName + " " + x.lastName}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleBorrowBook}
-            >
-              Borrow
-            </Button>
-          </Grid>
+  return (
+    <>
+      <Grid container>
+        <h1>Borrow book</h1>
+        <Grid item xs={12}>
+          <label>Name: </label>
+          {book.name}
         </Grid>
-      </>
-    );
-  }
+        <Grid item xs={12}>
+          <label>Author: </label>
+          {book.authorName}
+        </Grid>
+        <Grid item xs={12}>
+          <label>Status: </label>
+          {book.status}
+        </Grid>
+        <Grid item xs={12}>
+          <label>Customer: </label>{" "}
+          <Select
+            value={selectedCustomer}
+            onChange={handleCustomerChange}
+          >
+            {customers.map(x => (
+              <MenuItem key={x.id} value={x.firstName + " " + x.lastName}>
+                {x.firstName + " " + x.lastName}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleBorrowBook}
+          >
+            Borrow
+            </Button>
+        </Grid>
+      </Grid>
+    </>
+  );
 }

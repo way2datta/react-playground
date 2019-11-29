@@ -26,9 +26,7 @@ export function Gridview({
   datasource,
   headers,
   properties,
-  actions,
-  handleReturnBook,
-  handleBorrowBook
+  actions
 }) {
   const classes = useStyles();
 
@@ -43,7 +41,7 @@ export function Gridview({
           <TableHead>
             <TableRow>
               {headers.map(header => (
-                <TableCell>{header}</TableCell>
+                <TableCell key={header}>{header}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -53,11 +51,11 @@ export function Gridview({
                 <TableRow key={model.id}>
                   {properties &&
                     properties.map(propName => (
-                      <TableCell>{model[propName]}</TableCell>
+                      <TableCell key={propName}>{model[propName]}</TableCell>
                     ))}
                   {actions &&
-                    actions.map(action => (
-                      <TableCell>{action(model)}</TableCell>
+                    actions.map((action, index) => (
+                      <TableCell key={index}>{action(model)}</TableCell>
                     ))}
                 </TableRow>
               );
