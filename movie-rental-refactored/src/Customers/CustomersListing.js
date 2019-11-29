@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Gridview } from "./Gridview";
+import { Gridview } from "../Components/Gridview";
 
 export class CustomersListing extends React.Component {
   state = {

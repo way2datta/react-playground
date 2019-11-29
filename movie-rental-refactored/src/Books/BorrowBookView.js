@@ -80,7 +80,6 @@ export class BorrowBookView extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              //className={classes.button}
               onClick={this.handleBorrowBook}
             >
               Borrow

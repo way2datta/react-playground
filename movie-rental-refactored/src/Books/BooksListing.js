@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Gridview } from "./Gridview";
+import { Gridview } from "../Components/Gridview";
 import Button from "@material-ui/core/Button";
 
 export class BooksListing extends React.Component {
